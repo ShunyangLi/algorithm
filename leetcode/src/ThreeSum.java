@@ -2,24 +2,40 @@ import java.util.*;
 
 public class ThreeSum {
     public List<List<Integer>> threeSum(int[] nums) {
-
         List<List<Integer>> list = new LinkedList<>();
+        if (nums.length < 3) return list;
+        List<Integer> temp = null;
+        Arrays.sort(nums);
+
         for (int i = 0; i < nums.length; i ++) {
             int sub = 0 - nums[i];
+            if (temp != null) if (temp.contains(nums[i])) continue;
 
-            Map<Integer, Integer> map = new HashMap<>();
-//            int j = i + 1;
-            for (int j = 0; j < nums.length; j ++) {
-                int s = sub - nums[j];
-                if (map.containsKey(s)) {
-                    List<Integer> temp = new LinkedList<>();
+            int left = 0, right = nums.length - 1;
+            while (left != right) {
+                if (left == i){
+                    left ++;
+                    continue;
+                }
+                if (right == i) {
+                    right --;
+                    continue;
+                }
+                int sum = nums[left] + nums[right];
+
+                if (sum < sub) left ++;
+                else if (sum > sub) right --;
+                else {
+                    temp = new LinkedList<>();
+                    temp.add(nums[left]);
+                    temp.add(nums[right]);
                     temp.add(nums[i]);
-                    temp.add(nums[map.get(s)]);
-                    temp.add(nums[j]);
+
+                    Collections.sort(temp);
+                    if(list.contains(temp)) break;
                     list.add(temp);
                     break;
                 }
-                else map.put(nums[j], j);
             }
         }
         return list;
