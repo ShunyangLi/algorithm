@@ -36,5 +36,5 @@ public int maxSubArray(int[] nums) {
         MaximumSubarray ms = new MaximumSubarray();
         int[] array = new int[] {-2,1,-3,4,-1,2,1,-5,4};
         System.out.println(ms.maxSubArray(array));
-    }1
+    }
 }
