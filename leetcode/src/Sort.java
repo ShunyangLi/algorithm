@@ -3,6 +3,9 @@ import java.util.Arrays;
 public class Sort {
     /**
      * bubble sort methods
+     * 冒泡排序，就是较大的数和较小的数字交换位置，一直这样循环，
+     * 直到最后，这样就排序完了
+     * O(n^2)
      * @param nums which need to be sorted
      */
     public void bubble_sort(int[] nums) {
