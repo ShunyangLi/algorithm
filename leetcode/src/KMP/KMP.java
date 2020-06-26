@@ -1,17 +1,8 @@
+package KMP;
+
 import java.util.Arrays;
 
-public class StrStr {
-//    public int strStr(String haystack, String needle) {
-//        if (needle.length() == 0) return 0;
-//        char c = needle.charAt(0);
-//        for (int i = 0; i < haystack.length(); i ++) {
-//            if (haystack.charAt(i) == c) {
-//                if (i + needle.length() > haystack.length()) return -1;
-//                if (haystack.substring(i, i+needle.length()).equals(needle)) return i;
-//            }
-//        }
-//        return -1;
-//    }
+public class KMP {
 
     public int[] prefix(String str) {
         int[] prefix = new int[str.length()];
@@ -44,12 +35,7 @@ public class StrStr {
         prefix[0] = -1;
     }
 
-    // nm用的时间更长了....
-    public int strStr (String text, String match) {
-        if (text.equals(match)) return 0;
-        if (text.length() == 0) return -1;
-        if (match.length() == 0) return 0;
-
+    public void kmp_search (String text, String match) {
         int[] prefix = prefix(match);
         System.out.println(Arrays.toString(prefix));
 
@@ -59,7 +45,8 @@ public class StrStr {
         int j = 0;
         while ( i < text.length()) {
             if (j == match.length() - 1 && text.charAt(i) == match.charAt(j)) {
-                return i - j;
+                System.out.println(text.substring(i - j, i));
+                j = prefix[j];
             }
             if (text.charAt(i) == match.charAt(j)) {
                 i ++;
@@ -72,7 +59,12 @@ public class StrStr {
                 }
             }
         }
+    }
 
-        return -1;
+    public static void main(String[] args) {
+        String str = "ababcabaa";
+        String text = "abababcabaaabababababa";
+        KMP kmp = new KMP();
+        kmp.kmp_search(text, str);
     }
 }
